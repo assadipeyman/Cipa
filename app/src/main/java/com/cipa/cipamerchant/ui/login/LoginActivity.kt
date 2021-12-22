@@ -11,22 +11,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cipa.cipamerchant.databinding.ActivityLoginBinding
-import com.cipa.cipamerchant.databinding.ActivityMainBinding
-import com.cipa.cipamerchant.listener.ViewModelListener
-import com.cipa.cipamerchant.ui.home.HomeViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AlertDialog
-import com.cipa.cipamerchant.R
-import android.view.Gravity
-import android.view.Window
 
-import android.view.WindowManager
+import android.view.LayoutInflater
+import com.cipa.cipamerchant.base.BaseActivity
 
-
-
-
-
-class LoginActivity : AppCompatActivity(), ViewModelListener {
+class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var  loginViewModel:LoginViewModel;
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,27 +27,8 @@ class LoginActivity : AppCompatActivity(), ViewModelListener {
             ViewModelProvider(this).get(LoginViewModel::class.java)
         loginViewModel.setViewModelListener(this)
 
-        binding.txtUsername.setText("asdfas")
-        binding.btnLogin.setOnClickListener { loginViewModel.handleLoginClick() }
+        binding.txtUsername.setText("mcUsr1")
+        binding.textPassword.setText("123456")
+        binding.btnLogin.setOnClickListener { loginViewModel.handleLoginClick(binding.txtUsername.text.toString() , binding.textPassword.text.toString()) }
     }
-    override fun showMessage(message: String) {
-        TODO("Not yet implemented")
-    }
-
-    lateinit var  dialog:AlertDialog;
-
-    override fun showWaiting() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setCancelable(false) // if you want user to wait for some process to finish,
-
-        builder.setView(R.layout.layout_progress)
-        dialog = builder.create()
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show();
-    }
-
-    override fun closeWaiting() {
-        dialog.dismiss();
-    }
-
 }
