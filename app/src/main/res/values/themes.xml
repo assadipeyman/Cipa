@@ -12,12 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
         <item name="colorButtonNormal">@color/RED_187</item>
         <item name="android:colorButtonNormal">@color/RED_187</item>
 
         <item name="android:alertDialogTheme">@style/DialogTheme</item>
         <item name="alertDialogTheme">@style/DialogTheme</item>
+
     </style>
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowMinWidthMajor">0%</item>
