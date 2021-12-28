@@ -1,9 +1,11 @@
 package com.cipa.cipamerchant.ui.login
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.cipa.cipamerchant.base.BaseViewModel
 import com.cipa.cipamerchant.data.ServiceData.McLoginRequest
 import com.cipa.cipamerchant.data.ServiceData.McLoginResponse
+import com.cipa.cipamerchant.data.businessData.BMarket
 import com.cipa.cipamerchant.listener.ViewModelListener
 import com.cipa.cipamerchant.memory.MemoryData
 import com.cipa.cipamerchant.service.CipaService
@@ -15,6 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel()  : BaseViewModel() ,   Callback<McLoginResponse>{
+
+    var action : MutableLiveData<String> = MutableLiveData()
 
     override fun  setViewModelListener(_listener:ViewModelListener) {
         listener = _listener
@@ -31,8 +35,9 @@ class LoginViewModel()  : BaseViewModel() ,   Callback<McLoginResponse>{
 
     override fun onResponse(call: Call<McLoginResponse>, response: Response<McLoginResponse>) {
         MemoryData.setData(response.body())
-        val g : Gson = Gson()
-        Log.d("Tag json market" ,  g.toJson(MemoryData.markets))
+        val g: Gson = Gson()
+        Log.d("Tag json market", g.toJson(MemoryData.markets))
+        action.postValue("SHOWMARKET")
     }
 
     override fun onFailure(call: Call<McLoginResponse>, t: Throwable) {

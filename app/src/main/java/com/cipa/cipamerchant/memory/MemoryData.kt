@@ -8,9 +8,11 @@ import com.cipa.cipamerchant.data.businessData.BSupplier
 import com.google.gson.annotations.SerializedName
 
 object MemoryData{
-   @SerializedName("User") lateinit var user: MCUser
-    @SerializedName("Markets") var markets: ArrayList<BMarket> = ArrayList()
+   @SerializedName("User")  var user: MCUser? = null
+    @SerializedName("Markets")lateinit var markets: ArrayList<BMarket>
     fun setData(data: McLoginResponse?){
+        markets = arrayListOf();
+        user=null
         if (data==null) return
         user = data!!.mCUser
         data!!.markets.forEach {
@@ -30,7 +32,7 @@ object MemoryData{
                     )
                 )
             }
-            markets.add(BMarket(it.merchantBDM, suppliers))
+            markets?.add(BMarket(it.merchantBDM, suppliers))
         }
     }
 }

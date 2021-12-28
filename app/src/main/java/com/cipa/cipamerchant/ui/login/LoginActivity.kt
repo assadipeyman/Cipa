@@ -1,6 +1,7 @@
 package com.cipa.cipamerchant.ui.login
 
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,7 +14,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.cipa.cipamerchant.databinding.ActivityLoginBinding
 
 import android.view.LayoutInflater
+import androidx.lifecycle.Observer
+import com.cipa.cipamerchant.adaptor.MarketAdapter
 import com.cipa.cipamerchant.base.BaseActivity
+import com.cipa.cipamerchant.ui.Market.MarketListActivity
 
 class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -30,5 +34,12 @@ class LoginActivity : BaseActivity() {
         binding.txtUsername.setText("mcUsr1")
         binding.textPassword.setText("123456")
         binding.btnLogin.setOnClickListener { loginViewModel.handleLoginClick(binding.txtUsername.text.toString() , binding.textPassword.text.toString()) }
+        loginViewModel.action.observe(this , Observer { t ->
+
+            val intent = Intent(this, MarketListActivity::class.java).apply {
+            }
+            startActivity(intent)
+
+        })
     }
 }
