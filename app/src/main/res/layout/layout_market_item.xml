@@ -10,56 +10,57 @@
         android:layout_height="wrap_content"
         android:elevation="4dp"
         >
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
-            >
+            android:orientation="vertical">
+
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_height="96dp"
                 android:layout_width="96dp"
-                android:src="@drawable/ic_market"
+                android:layout_height="96dp"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-            />
+                android:src="@drawable/ic_market"
+                android:background="@drawable/shape_circle"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_shop_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="فروشگاه"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            />
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="فروشگاه" />
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="8dp"
                 android:gravity="center"
-                >
+                android:orientation="horizontal">
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_shop_info1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="فروشگاه"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_weight="1"
+                    android:text="فروشگاه" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_shop_info2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="فروشگاه"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_weight="1"
+                    android:text="فروشگاه" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_shop_info3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="فروشگاه"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_weight="1"
+                    android:text="فروشگاه" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
