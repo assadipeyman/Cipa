@@ -17,29 +17,40 @@ import android.view.LayoutInflater
 import androidx.lifecycle.Observer
 import com.cipa.cipamerchant.adaptor.MarketAdapter
 import com.cipa.cipamerchant.base.BaseActivity
+import com.cipa.cipamerchant.base.BaseViewModel
 import com.cipa.cipamerchant.ui.Market.MarketListActivity
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity<LoginViewModel>(LoginViewModel::class.java) {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var  loginViewModel:LoginViewModel;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loginViewModel =
-            ViewModelProvider(this).get(LoginViewModel::class.java)
-        loginViewModel.setViewModelListener(this)
+        InitViewModel()
 
         binding.txtUsername.setText("mcUsr1")
         binding.textPassword.setText("123456")
-        binding.btnLogin.setOnClickListener { loginViewModel.handleLoginClick(binding.txtUsername.text.toString() , binding.textPassword.text.toString()) }
-        loginViewModel.action.observe(this , Observer { t ->
+        binding.btnLogin.setOnClickListener {
+            viewModel.handleLoginClick(
+                binding.txtUsername.text.toString(),
+                binding.textPassword.text.toString()
+            )
+        }
+    }
 
-            val intent = Intent(this, MarketListActivity::class.java).apply {
+    override fun OnAction(type: BaseViewModel.ActionType) {
+        when (type) {
+            BaseViewModel.ActionType.SHOW_WAIT -> showWaiting()
+            BaseViewModel.ActionType.CLOSE_WAIT -> closeWaiting()
+            BaseViewModel.ActionType.SHOW_MARKET_ACTIVITY -> {
+                val intent = Intent(this, MarketListActivity::class.java).apply {
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
-
-        })
+            else -> {
+                print("x is neither 1 nor 2")
+            }
+        }
     }
 }

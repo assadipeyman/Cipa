@@ -1,7 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.Market.MarketListActivity">
 
-</androidx.recyclerview.widget.RecyclerView>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:fitsSystemWindows="true"
+        android:layout_height="310dp"
+        android:layout_width="match_parent"
+        android:theme="@style/Theme.MyApplication.AppBarOverlay"
+        >
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:toolbarId="@+id/toolbar"
+            android:layout_gravity="right"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="pin"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:fontFamily="@font/iransansmobile"
+                        android:text="علی علیزاده"
+                        android:textColor="@color/white"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="250dp"
+                    ></LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="180dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_obj"
+                        android:layout_marginRight="50dp"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="کل بدهی"
+                            android:fontFamily="@font/iransansmobile"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                        <TextView
+                            android:id="@+id/tv_total_debt"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="43"
+                            android:text="00000000 ریال"
+                            android:fontFamily="@font/iransansmobile"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="ریال"
+                            android:fontFamily="@font/iransansmobile"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_obj"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="بیشینه اعتبار"
+                            android:fontFamily="@font/iransansmobile"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                        <TextView
+                            android:id="@+id/tv_max_credit"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3"
+                            android:text="00000000 ریال"
+                            android:fontFamily="@font/iransansmobile"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="ریال"
+                            android:fontFamily="@font/iransansmobile"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/rv_market"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

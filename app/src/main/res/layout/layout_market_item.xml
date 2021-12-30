@@ -2,15 +2,16 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="@dimen/activity_horizontal_margin"
+    android:padding="12dp"
     >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
         >
-
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,21 +22,27 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_market"
+                android:src="@drawable/ic_store_96"
+                android:scaleType="fitCenter"
+                android:padding="12dp"
                 android:background="@drawable/shape_circle"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_shop_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:text="فروشگاه" />
+                android:layout_margin="4dp"
+                android:text="فروشگاه"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -44,7 +51,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
-                    android:text="فروشگاه" />
+                    android:text="فروشگاه"
+                    android:gravity="center"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_shop_info2"
@@ -52,7 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
-                    android:text="فروشگاه" />
+                    android:text="فروشگاه"
+                    android:gravity="center"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_shop_info3"
@@ -60,7 +69,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
-                    android:text="فروشگاه" />
+                    android:text="فروشگاه"
+                    android:gravity="center"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

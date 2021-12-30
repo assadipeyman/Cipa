@@ -1,7 +1,8 @@
 package com.cipa.cipamerchant.listener
 
+import com.cipa.cipamerchant.base.BaseViewModel
+import java.util.*
+
 interface  ViewModelListener {
-    fun showMessage(message :String )
-    fun showWaiting()
-    fun closeWaiting()
+    fun OnAction(type: BaseViewModel.ActionType)
 }

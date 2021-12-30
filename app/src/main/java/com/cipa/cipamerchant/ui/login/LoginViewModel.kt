@@ -16,32 +16,26 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel()  : BaseViewModel() ,   Callback<McLoginResponse>{
+class LoginViewModel()  : BaseViewModel() ,   Callback<McLoginResponse> {
 
-    var action : MutableLiveData<String> = MutableLiveData()
-
-    override fun  setViewModelListener(_listener:ViewModelListener) {
-        listener = _listener
-    }
-    fun handleLoginClick(username:String , password:String) {
-        listener.showWaiting()
-
+    fun handleLoginClick(username: String, password: String) {
+        action.postValue(ActionType.SHOW_WAIT)
         val request = RetroServiceBuilder.buildService(CipaService::class.java)
 
         val call = request.McLogin(McLoginRequest(username, password))
         call.enqueue(this)
-        listener.closeWaiting()
     }
 
     override fun onResponse(call: Call<McLoginResponse>, response: Response<McLoginResponse>) {
+        action.value = ActionType.CLOSE_WAIT
         MemoryData.setData(response.body())
         val g: Gson = Gson()
         Log.d("Tag json market", g.toJson(MemoryData.markets))
-        action.postValue("SHOWMARKET")
+        action.postValue(ActionType.SHOW_MARKET_ACTIVITY)
     }
 
     override fun onFailure(call: Call<McLoginResponse>, t: Throwable) {
-        TODO("Not yet implemented")
+        action.postValue(ActionType.CLOSE_WAIT)
     }
 
 }
