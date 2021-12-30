@@ -10,6 +10,7 @@ abstract class BaseViewModel() :ViewModel() {
      enum class ActionType {
           SHOW_WAIT,
           CLOSE_WAIT,
-          SHOW_MARKET_ACTIVITY
+          SHOW_MARKET_ACTIVITY,
+          SHOW_SUPPLIER_ACTIVITY
      }
 }

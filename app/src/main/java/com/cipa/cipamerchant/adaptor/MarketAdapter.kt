@@ -1,38 +1,62 @@
 package com.cipa.cipamerchant.adaptor
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.cipa.cipamerchant.R
 import com.cipa.cipamerchant.data.businessData.BMarket
+import com.cipa.cipamerchant.databinding.ActivityLoginBinding
+import com.cipa.cipamerchant.databinding.LayoutGeneralItemBinding
+import com.cipa.cipamerchant.memory.MemoryData
+import com.cipa.cipamerchant.utils.StringUtils
+import com.cipa.cipamerchant.utils.StringUtils.withCurrencyFormat
+import com.cipa.cipamerchant.utils.StringUtils.withPersianDigits
 
 class MarketAdapter(
      private val markets:List<BMarket>,
-     private val onItemClicked: (position: Int, market:BMarket) -> Unit) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
-
+     private val onItemClicked: (position: Int, market:BMarket) -> Unit
+) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
+     private lateinit var context : Context
      override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketViewHolder {
-          val context = parent.context
-          val inflater = LayoutInflater.from(context)
-          val view = inflater.inflate(R.layout.layout_market_item, parent, false)
-          return MarketViewHolder(view);
+          context = parent.context
+
+          var binding =LayoutGeneralItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+          return MarketViewHolder(binding)
      }
 
      override fun onBindViewHolder(holder: MarketViewHolder, position: Int) {
           val data = markets[position]
-          holder.tv_shopname.text = data.merchantBDM.name
-
+          holder.binding.tvName.text = data.merchantBDM.name
+          holder.binding.ivImage.setImageResource(R.drawable.ic_store_96)
+          val debt: Double = -1 * MemoryData.getSumDebtOfMarket(data.merchantBDM.id)
+          holder.binding.tvDebt.text = debt.withCurrencyFormat
+          if (debt < 0.0) {
+               holder.binding.tvDebt.setTextColor(
+                    ContextCompat.getColor(
+                         context,
+                         R.color.red_price
+                    )
+               )
+               holder.binding.tvDebtTitle.text = "بدهکار"
+          } else {
+               holder.binding.tvDebt.setTextColor(
+                    ContextCompat.getColor(
+                         context,
+                         R.color.green_price
+                    )
+               )
+               holder.binding.tvDebtTitle.text = "بستانکار"
+          }
           holder.itemView.setOnClickListener {
                onItemClicked(position, markets[position])
           }
      }
 
-     class MarketViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-          val tv_shopname: TextView = view.findViewById(R.id.tv_shop_name)
-          val tv_shop_info1: TextView = view.findViewById(R.id.tv_shop_info1)
-          val tv_shop_info2: TextView = view.findViewById(R.id.tv_shop_info2)
-          val tv_shop_info3: TextView = view.findViewById(R.id.tv_shop_info3)
+     class MarketViewHolder(var binding:        LayoutGeneralItemBinding) : RecyclerView.ViewHolder(binding.root) {
      }
 
      override fun getItemCount(): Int {

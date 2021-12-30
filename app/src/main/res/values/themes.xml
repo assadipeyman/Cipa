@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Cipa" parent="Theme.AppCompat.Light">
+    <style name="Theme.Cipa" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/RED_187</item>
         <item name="colorPrimaryVariant">@android:color/black</item>
@@ -20,6 +20,7 @@
         <item name="android:fontFamily">@font/iransansmobile</item>
         <item name="fontFamily">@font/iransansmobile</item>
         <item name="android:textStyle">normal</item>
+        <!--<item name="titleTextColor">@color/white</item>-->
     </style>
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowMinWidthMajor">0%</item>
@@ -30,7 +31,9 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="Theme.MyApplication.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    </style>
+
     <style name="Theme.MyApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!--    <style name="AppTheme.Button" parent="Base.Widget.AppCompat.Button">
             <item name="colorButtonNormal">@color/RED_187</item>

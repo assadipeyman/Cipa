@@ -35,4 +35,22 @@ object MemoryData{
             markets?.add(BMarket(it.merchantBDM, suppliers))
         }
     }
+    fun getSumDebtOfMarket(marketId: Int) :Double{
+        var sumDebt : Double = 0.0
+        val market: BMarket? = getMarket(marketId)
+        if(market!=null)
+            market.supliers.forEach { t ->
+                sumDebt += t.credit!!.debt
+            }
+        return sumDebt;
+    }
+    fun getMarket(marketId:Int): BMarket? {
+        return markets.find<BMarket> { bMarket -> bMarket.merchantBDM.id == marketId }
+    }
+    fun  getSupplier(id: Int):BSupplier?{
+        markets.forEach {
+            bMarket -> bMarket.supliers.forEach { bSupplier ->  if(bSupplier.id == id) return  bSupplier }
+        }
+        return  null
+    }
 }

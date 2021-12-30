@@ -23,12 +23,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Market.MarketListActivity"
+            android:name=".ui.market.MarketListActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Cipa.NoActionBar"
             android:label="@string/app_name">
         </activity>
+        <activity
+            android:name=".ui.supplier.SupplierListActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Cipa"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".ui.supplier.SupplierInfoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Cipa"
+            android:label="@string/app_name">
+        </activity>
     </application>
-
 </manifest>

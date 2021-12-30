@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.Market.MarketListActivity">
+    tools:context=".ui.market.SupplierListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -68,8 +68,7 @@
                         >
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="کل بدهی"
                             android:fontFamily="@font/iransansmobile"
                             android:layout_gravity="center"
@@ -80,21 +79,19 @@
                             android:id="@+id/tv_total_debt"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="43"
+                            android:layout_weight="1"
                             android:text="00000000 ریال"
                             android:fontFamily="@font/iransansmobile"
-                            android:layout_gravity="center"
-                            android:gravity="center"
+                            android:gravity="bottom|center_horizontal"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="ریال"
                             android:fontFamily="@font/iransansmobile"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
                     </LinearLayout>
                     <LinearLayout
@@ -106,8 +103,8 @@
                         >
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+
                             android:text="بیشینه اعتبار"
                             android:fontFamily="@font/iransansmobile"
                             android:layout_gravity="center"
@@ -118,21 +115,19 @@
                             android:id="@+id/tv_max_credit"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="3"
+                            android:layout_weight="1"
                             android:text="00000000 ریال"
                             android:fontFamily="@font/iransansmobile"
-                            android:layout_gravity="center"
-                            android:gravity="center"
+                            android:gravity="bottom|center_horizontal"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="ریال"
                             android:fontFamily="@font/iransansmobile"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
                     </LinearLayout>
                 </LinearLayout>

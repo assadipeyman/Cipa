@@ -17,4 +17,9 @@
     <color name="gray_dd">#FFdddddd</color>
     <color name="gray_cc">#FFcccccc</color>
 
+    <color name="red_price">#FFc44e52</color>
+    <color name="green_price">#FF55a868</color>
+
+
+
 </resources>
