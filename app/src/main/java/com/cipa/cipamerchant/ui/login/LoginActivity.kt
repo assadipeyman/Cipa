@@ -3,6 +3,7 @@ package com.cipa.cipamerchant.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import com.cipa.cipamerchant.MainActivity
 import com.cipa.cipamerchant.databinding.ActivityLoginBinding
 
 import com.cipa.cipamerchant.base.BaseActivity
@@ -17,9 +18,9 @@ class LoginActivity : BaseActivity<LoginViewModel>(LoginViewModel::class.java) {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        InitViewModel()
+        InitActivity()
 
-        binding.txtUsername.setText("mcUsr1")
+        binding.txtUsername.setText("merchant")
         binding.textPassword.setText("123456")
         binding.btnLogin.setOnClickListener {
             viewModel.handleLoginClick(
@@ -34,7 +35,7 @@ class LoginActivity : BaseActivity<LoginViewModel>(LoginViewModel::class.java) {
             BaseViewModel.ActionType.SHOW_WAIT -> showWaiting()
             BaseViewModel.ActionType.CLOSE_WAIT -> closeWaiting()
             BaseViewModel.ActionType.SHOW_MARKET_ACTIVITY -> {
-                val intent = Intent(this, MarketListActivity::class.java).apply {
+                val intent = Intent(this, MainActivity::class.java).apply {
                 }
                 startActivity(intent)
             }

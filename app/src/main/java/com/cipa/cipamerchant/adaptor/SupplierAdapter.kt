@@ -26,7 +26,7 @@ class SupplierAdapter(
      override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupplierViewHolder {
           context = parent.context
           var binding =
-               LayoutGeneralItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+               LayoutSupplierItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
           return SupplierViewHolder(binding)
      }
 
@@ -34,7 +34,7 @@ class SupplierAdapter(
           val data = filteredSuppliers[position]
           holder.binding.tvName.text = data.name
           holder.binding.ivImage.setImageResource(R.drawable.ic_supplier)
-          val debt: Double = -1 * data.credit!!.debt
+          val debt: Long = -1 * data.credit!!.debt.toLong()
           holder.binding.tvDebt.text = debt.withCurrencyFormat
           if (debt < 0.0) {
                holder.binding.tvDebt.setTextColor(
@@ -43,7 +43,6 @@ class SupplierAdapter(
                          R.color.red_price
                     )
                )
-               holder.binding.tvDebtTitle.text = "بدهکار"
           } else {
                holder.binding.tvDebt.setTextColor(
                     ContextCompat.getColor(
@@ -51,14 +50,13 @@ class SupplierAdapter(
                          R.color.green_price
                     )
                )
-               holder.binding.tvDebtTitle.text = "بستانکار"
           }
           holder.itemView.setOnClickListener {
                onItemClicked(position, suppliers[position])
           }
      }
 
-     class SupplierViewHolder(var binding: LayoutGeneralItemBinding) : RecyclerView.ViewHolder(binding.root) {
+     class SupplierViewHolder(var binding: LayoutSupplierItemBinding) : RecyclerView.ViewHolder(binding.root) {
      }
 
      override fun getItemCount(): Int {

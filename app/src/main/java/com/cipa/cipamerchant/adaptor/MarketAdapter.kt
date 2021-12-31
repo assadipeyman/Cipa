@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cipa.cipamerchant.R
 import com.cipa.cipamerchant.data.businessData.BMarket
 import com.cipa.cipamerchant.databinding.ActivityLoginBinding
+import com.cipa.cipamerchant.databinding.LayoutGeneralItem1Binding
 import com.cipa.cipamerchant.databinding.LayoutGeneralItemBinding
 import com.cipa.cipamerchant.memory.MemoryData
 import com.cipa.cipamerchant.utils.StringUtils
@@ -24,7 +25,7 @@ class MarketAdapter(
      override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketViewHolder {
           context = parent.context
 
-          var binding =LayoutGeneralItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+          var binding =LayoutGeneralItem1Binding.inflate(LayoutInflater.from(parent.context), parent, false)
           return MarketViewHolder(binding)
      }
 
@@ -32,7 +33,7 @@ class MarketAdapter(
           val data = markets[position]
           holder.binding.tvName.text = data.merchantBDM.name
           holder.binding.ivImage.setImageResource(R.drawable.ic_store_96)
-          val debt: Double = -1 * MemoryData.getSumDebtOfMarket(data.merchantBDM.id)
+          val debt: Long = -1 * MemoryData.getSumDebtOfMarket(data.merchantBDM.id)
           holder.binding.tvDebt.text = debt.withCurrencyFormat
           if (debt < 0.0) {
                holder.binding.tvDebt.setTextColor(
@@ -41,7 +42,6 @@ class MarketAdapter(
                          R.color.red_price
                     )
                )
-               holder.binding.tvDebtTitle.text = "بدهکار"
           } else {
                holder.binding.tvDebt.setTextColor(
                     ContextCompat.getColor(
@@ -49,14 +49,13 @@ class MarketAdapter(
                          R.color.green_price
                     )
                )
-               holder.binding.tvDebtTitle.text = "بستانکار"
           }
           holder.itemView.setOnClickListener {
                onItemClicked(position, markets[position])
           }
      }
 
-     class MarketViewHolder(var binding:        LayoutGeneralItemBinding) : RecyclerView.ViewHolder(binding.root) {
+     class MarketViewHolder(var binding:    LayoutGeneralItem1Binding) : RecyclerView.ViewHolder(binding.root) {
      }
 
      override fun getItemCount(): Int {

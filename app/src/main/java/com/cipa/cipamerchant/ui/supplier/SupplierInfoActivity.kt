@@ -2,26 +2,17 @@ package com.cipa.cipamerchant.ui.supplier
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.cipa.cipamerchant.adaptor.MarketAdapter
-import com.cipa.cipamerchant.adaptor.SupplierAdapter
 import com.cipa.cipamerchant.base.BaseActivity
 import com.cipa.cipamerchant.base.BaseViewModel
-import com.cipa.cipamerchant.databinding.ActivityMarketListBinding
-import com.cipa.cipamerchant.utils.StringUtils
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.widget.SearchView
+import android.view.View
 import androidx.core.content.ContextCompat
+import com.cipa.cipamerchant.MainActivity
 import com.cipa.cipamerchant.R
 import com.cipa.cipamerchant.data.businessData.BSupplier
 import com.cipa.cipamerchant.databinding.ActivitySupplierInfoBinding
-import com.cipa.cipamerchant.databinding.ActivitySupplierListBinding
 import com.cipa.cipamerchant.utils.StringUtils.withCurrencyFormat
 import com.cipa.cipamerchant.utils.StringUtils.withPersianDigits
-import kotlinx.coroutines.newSingleThreadContext
 
 class SupplierInfoActivity  : BaseActivity<SupplierInfoViewModel>(SupplierInfoViewModel::class.java) {
     private lateinit var binding: ActivitySupplierInfoBinding
@@ -29,8 +20,8 @@ class SupplierInfoActivity  : BaseActivity<SupplierInfoViewModel>(SupplierInfoVi
         super.onCreate(savedInstanceState)
         binding = ActivitySupplierInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        InitViewModel()
-        viewModel.handleFormLoad(intent.extras!!.getInt("supplierid"))
+        InitActivity()
+        viewModel.handleFormLoad(intent.extras!!.getInt("marketid"),intent.extras!!.getInt("supplierid"))
         viewModel.supplier.observe(this, Observer<BSupplier?> { t ->
             binding.tvName.text = t.name
             binding.tvBalanceAmount.text = t.credit!!.balanceAmount.withCurrencyFormat
@@ -49,9 +40,31 @@ class SupplierInfoActivity  : BaseActivity<SupplierInfoViewModel>(SupplierInfoVi
             binding.tvNonPenaltyDuration.text = t.credit!!.noPenaltyDuration.withPersianDigits
             binding.tvPenaltyRate.text = (t.credit!!.penaltyRate * 100).withPersianDigits
         })
+        viewModel.message.observe(this , Observer {
+            t -> showMessage(t)
+        })
+        binding.btnCharge.setOnClickListener(View.OnClickListener { v ->
+           // viewModel.charge(1200)
+        })
     }
 
     override fun OnAction(type: BaseViewModel.ActionType) {
+        when (type) {
+            BaseViewModel.ActionType.SHOW_WAIT -> showWaiting()
+            BaseViewModel.ActionType.CLOSE_WAIT -> closeWaiting()
+            BaseViewModel.ActionType.SHOW_MARKET_ACTIVITY -> {
+                val intent = Intent(this, MainActivity::class.java).apply {
+                }
+                startActivity(intent)
+            }
+            else -> {
+                print("x is neither 1 nor 2")
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
 
     }
 }

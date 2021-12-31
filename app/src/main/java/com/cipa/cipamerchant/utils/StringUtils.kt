@@ -43,4 +43,12 @@ object StringUtils {
                 return this.substring(0 , this.length-2)
             return this
         }
+
+    fun toPersianDigit(text:String): String{
+        var txt:java.lang.StringBuilder = java.lang.StringBuilder()
+        text.forEach { c: Char -> txt.append(PERSIAN_DIGITS[Integer.parseInt(c.toString())]) }
+
+        return txt.toString()
+    }
+
 }

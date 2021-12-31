@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="32dp"
+    >
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="شارژ اعتبار"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:fontFamily="@font/iransansmobile"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line_gradient"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        ></View>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="َشرکت"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:fontFamily="@font/iransansmobile"
+        />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_half_margin"
+        android:paddingBottom="@dimen/activity_horizontal_half_margin"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/shape_button1"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/activity_horizontal_half_margin"
+            android:text="ریال"/>
+        <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_charge_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:hint="مبلغ شارژ"
+            android:padding = "@dimen/activity_horizontal_quar_margin"
+            android:background="@null"
+        android:fontFamily="@font/iransansmobile"
+        />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_charge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:text="شارژ"
+        android:inputType="numberDecimal"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_obj"/>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="32dp"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

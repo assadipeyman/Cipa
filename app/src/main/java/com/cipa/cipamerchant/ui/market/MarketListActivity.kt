@@ -1,17 +1,13 @@
 package com.cipa.cipamerchant.ui.market
 
-import android.R.attr
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cipa.cipamerchant.adaptor.MarketAdapter
 import com.cipa.cipamerchant.base.BaseActivity
 import com.cipa.cipamerchant.base.BaseViewModel
 import com.cipa.cipamerchant.databinding.ActivityMarketListBinding
-import com.cipa.cipamerchant.utils.StringUtils
-import android.R.attr.key
 import com.cipa.cipamerchant.ui.supplier.SupplierListActivity
 import com.cipa.cipamerchant.utils.StringUtils.withCurrencyFormat
 
@@ -23,7 +19,7 @@ class MarketListActivity  : BaseActivity<MarketListViewModel>(MarketListViewMode
         super.onCreate(savedInstanceState)
         binding = ActivityMarketListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        InitViewModel()
+        InitActivity()
 
         viewModel.handleFormLoad()
         viewModel.marketList?.observe(this,

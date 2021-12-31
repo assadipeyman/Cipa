@@ -10,8 +10,11 @@ import com.cipa.cipamerchant.memory.MemoryData
 
 class SupplierListViewModel()  : BaseViewModel() {
     var supplierList: MutableLiveData<ArrayList<BSupplier>> = MutableLiveData()
+    var title : MutableLiveData<String> = MutableLiveData()
 
     fun handleFormLoad(maerketId: Int) {
-        supplierList.postValue(MemoryData.getMarket(maerketId)!!.supliers)
+        val bmarket : BMarket? = MemoryData.getMarket(maerketId)
+        supplierList.postValue(bmarket!!.supliers)
+        title.postValue(bmarket.merchantBDM.name)
     }
 }

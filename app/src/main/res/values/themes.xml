@@ -20,6 +20,7 @@
         <item name="android:fontFamily">@font/iransansmobile</item>
         <item name="fontFamily">@font/iransansmobile</item>
         <item name="android:textStyle">normal</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <!--<item name="titleTextColor">@color/white</item>-->
     </style>
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
@@ -40,4 +41,14 @@
             <item name="android:colorButtonNormal">@color/RED_187</item>
             <item name="android:textColor">@android:color/white</item>
         </style>-->
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_bottom_sheet</item>
+    </style>
 </resources>
