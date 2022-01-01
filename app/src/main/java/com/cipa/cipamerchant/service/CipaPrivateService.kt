@@ -11,6 +11,9 @@ interface CipaPrivateService {
     @POST("/api/MerchantCharge")
     fun MerchantCharge(@Body request: CreditChargeRequest): Call<Credit>
 
+    @POST("/api/MerchantPayBill")
+    fun PayBill(@Body request: PayBillRequest): Call<PayBillResponse>
+
     @GET("/api/GetDeliverBySupplier/{supplierId}")
     fun GetDeliverBySupplier(@Path("supplierId") supplierId:Int): Call<GetDriversResponse>
 }

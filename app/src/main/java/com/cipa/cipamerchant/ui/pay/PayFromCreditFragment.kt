@@ -1,5 +1,6 @@
 package com.cipa.cipamerchant.ui.credit
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,26 +12,35 @@ import com.cipa.cipamerchant.R
 import com.cipa.cipamerchant.base.BaseBottomSheetFragment
 import com.cipa.cipamerchant.base.BaseViewModel
 import com.cipa.cipamerchant.databinding.FragmentCreditChargeBinding
+import com.cipa.cipamerchant.databinding.FragmentPayFromCreditBinding
+import com.cipa.cipamerchant.ui.driver.DriverListActivity
 import com.cipa.cipamerchant.ui.supplier.SupplierListActivity
 import com.cipa.cipamerchant.utils.StringUtils.withPersianDigits
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
 
-class CreditChargeFragment :  BaseBottomSheetFragment<CreditChargeViewModel>(CreditChargeViewModel::class.java) {
-    private lateinit  var binding: FragmentCreditChargeBinding
+class PayFromCreditFragment :  BaseBottomSheetFragment<PayFromCreditViewModel>(PayFromCreditViewModel::class.java) {
+    private lateinit  var binding: FragmentPayFromCreditBinding
     lateinit var inflater: LayoutInflater
+    var creditId:Int=0
+    var supplierId:Int=0
+    var marketId:Int=0
+    var suppliername:Int=0
+    var driverId:Int=0
+    var driverName:String=""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         this.inflater = inflater
-        val view: View = inflater.inflate(R.layout.fragment_credit_charge, container, false)
-        binding = FragmentCreditChargeBinding.bind(view)
+        val view: View = inflater.inflate(R.layout.fragment_pay_from_credit, container, false)
+        binding = FragmentPayFromCreditBinding.bind(view)
         initFragment()
-        viewModel.handleFormLoad(
-            requireArguments().getInt("creditid"),
-        )
+        creditId =  requireArguments().getInt("creditid")
+        supplierId =  requireArguments().getInt("supplierid")
+        marketId =  requireArguments().getInt("marketid")
+        viewModel.handleFormLoad(creditId)
 
         binding.tvName.text =requireArguments().getString("suppliername")
 
@@ -38,8 +48,23 @@ class CreditChargeFragment :  BaseBottomSheetFragment<CreditChargeViewModel>(Cre
             showMessage(t)
         })
 
+        binding.tvDriver.setOnClickListener( View.OnClickListener {
+            v ->
+            val intent = Intent(requireActivity(), DriverListActivity::class.java)
+            val mBundle = Bundle()
+            mBundle.putInt("marketid", marketId)
+            mBundle.putInt("supplierid", supplierId)
+            mBundle.putInt("creditid", creditId)
+            intent.putExtras(mBundle)
+            startActivityForResult(intent , 1)
+        })
+
         binding.btnCharge.setOnClickListener(View.OnClickListener { v ->
-            viewModel.charge(Integer.parseInt(binding.etChargeAmount.text.toString().replace(",","")))
+            viewModel.pay(
+                Integer.parseInt(binding.etChargeAmount.text.toString().replace(",","")),
+                binding.etInvoiceNumber.text.toString(),
+                driverId
+            )
         })
 
         binding.etChargeAmount.addTextChangedListener(textWatcher)
@@ -55,6 +80,13 @@ class CreditChargeFragment :  BaseBottomSheetFragment<CreditChargeViewModel>(Cre
             state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }*/
         return view
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        driverName = data!!.getStringExtra("drivername")!!
+        driverId = data!!.getIntExtra("driverid", 0)
+        binding.tvDriver.text = driverName
     }
 
 private var flag: Int=0;

@@ -20,43 +20,38 @@ import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.cipa.cipamerchant.data.model.MessageDialogData
 
-class CreditChargeViewModel()  : BaseViewModel() {
+class PayFromCreditViewModel()  : BaseViewModel() {
 
     var message: MutableLiveData<MessageDialogData> = MutableLiveData()
     var state: MutableLiveData<Boolean> = MutableLiveData()
     var creditId: Int = 0
     fun handleFormLoad(creditId:Int) {
         this.creditId = creditId
-        uiUpdate()
     }
 
-    fun uiUpdate() {
-    }
-
-    fun charge(amount: Number) {
+    fun pay(amount: Number , invoicenumber: String , driverId :Int) {
         action.postValue(BaseViewModel.ActionType.SHOW_WAIT)
         val request = RetroServiceBuilder.buildService(CipaPrivateService::class.java)
 
         val call =
-            request.MerchantCharge(CreditChargeRequest(amount as Int, creditId))
-        call.enqueue(object : Callback<Credit> {
+            request.PayBill(PayBillRequest(amount.toDouble(),invoicenumber,creditId,driverId ,"خرید"))
+        call.enqueue(object : Callback<PayBillResponse> {
             override fun onResponse(
-                call: Call<Credit>,
-                response: Response<Credit>
+                call: Call<PayBillResponse>,
+                response: Response<PayBillResponse>
             ) {
                 action.postValue(BaseViewModel.ActionType.CLOSE_WAIT)
                 if (response.code() == 200 && response.body() != null) {
                     MemoryData.updateCredit(
-                        response.body()!!.cMerchantId,
-                        response.body()!!.id,
-                        response.body()!!
+                        response.body()!!.credit.cMerchantId,
+                        response.body()!!.credit.id,
+                        response.body()!!.credit
                     )
-                    uiUpdate();
                     message.postValue(
                         MessageDialogData(
                             SweetAlertDialog.SUCCESS_TYPE,
                             "شارژ",
-                            "َشارژ اعتبار با موفقیت انجام شد"
+                            "َخرید با موفقیت انجام شد"
                         )
                     )
                     state.postValue(true)
@@ -75,7 +70,7 @@ class CreditChargeViewModel()  : BaseViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<Credit>, t: Throwable) {
+            override fun onFailure(call: Call<PayBillResponse>, t: Throwable) {
                 action.postValue(BaseViewModel.ActionType.CLOSE_WAIT)
                 message.postValue(
                     MessageDialogData(

@@ -60,6 +60,15 @@ object MemoryData {
         return null
     }
 
+    fun getSupplier(creditId: Int): BSupplier? {
+        markets.forEach { bMarket ->
+                bMarket.supliers.forEach { bSupplier ->
+                    if (bSupplier.credit!!.id == creditId) return bSupplier
+                }
+        }
+        return null
+    }
+
     fun updateDriverList(marketId: Int, supplierId: Int , drivers:  List<Driver>) {
         markets.forEach { bMarket ->
             if (bMarket.merchantBDM.id == marketId)
@@ -71,8 +80,9 @@ object MemoryData {
     fun getToken():String{
         return user!!.tTKK + ":" + user!!.userName
     }
-    fun updateCredit(creditId : Int , credit: Credit){
+    fun updateCredit(marketId:Int ,  creditId : Int , credit: Credit){
         markets.forEach { bMarket ->
+            if (bMarket.merchantBDM.id == marketId)
             bMarket.supliers.forEach { bSupplier ->
                 if (bSupplier.credit!!.id == creditId) bSupplier.credit = credit
             }

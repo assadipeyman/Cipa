@@ -1,27 +1,19 @@
 package com.cipa.cipamerchant.ui.supplier
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.cipa.cipamerchant.MainActivity
 import com.cipa.cipamerchant.R
 import com.cipa.cipamerchant.base.BaseBottomSheetFragment
-import com.cipa.cipamerchant.base.BaseFragment
 import com.cipa.cipamerchant.base.BaseViewModel
 import com.cipa.cipamerchant.data.businessData.BSupplier
 import com.cipa.cipamerchant.databinding.ActivitySupplierInfoBinding
-import com.cipa.cipamerchant.ui.credit.CreditChargeFragment
-import com.cipa.cipamerchant.ui.home.HomeViewModel
 import com.cipa.cipamerchant.utils.StringUtils.withCurrencyFormat
 import com.cipa.cipamerchant.utils.StringUtils.withPersianDigits
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import java.util.Observer
 
 class SupplierInfoBottomSheetDialogFragment :  BaseBottomSheetFragment<SupplierInfoViewModel>(SupplierInfoViewModel::class.java) {
     private lateinit  var binding: ActivitySupplierInfoBinding
@@ -64,6 +56,10 @@ class SupplierInfoBottomSheetDialogFragment :  BaseBottomSheetFragment<SupplierI
         binding.btnCharge.setOnClickListener(View.OnClickListener { v ->
             thisDialog.dismiss()
             (requireActivity() as SupplierListActivity).openCharge(supplier)
+        })
+        binding.btnPay.setOnClickListener(View.OnClickListener { v ->
+            thisDialog.dismiss()
+            (requireActivity() as SupplierListActivity).openPay(supplier)
         })
 
         thisDialog =  dialog as BottomSheetDialog

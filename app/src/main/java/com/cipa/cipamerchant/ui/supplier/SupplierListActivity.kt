@@ -1,7 +1,6 @@
 package com.cipa.cipamerchant.ui.supplier
 
 import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,12 +9,12 @@ import com.cipa.cipamerchant.base.BaseActivity
 import com.cipa.cipamerchant.base.BaseViewModel
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
+import com.cipa.cipamerchant.MainActivity
 import com.cipa.cipamerchant.R
 import com.cipa.cipamerchant.data.businessData.BSupplier
 import com.cipa.cipamerchant.databinding.ActivitySupplierListBinding
 import com.cipa.cipamerchant.ui.credit.CreditChargeFragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.cipa.cipamerchant.ui.credit.PayFromCreditFragment
 
 class SupplierListActivity  : BaseActivity<SupplierListViewModel>(SupplierListViewModel::class.java),
     SearchView.OnQueryTextListener {
@@ -72,14 +71,35 @@ class SupplierListActivity  : BaseActivity<SupplierListViewModel>(SupplierListVi
      fun openCharge(supplier: BSupplier){
         val bottomSheet : CreditChargeFragment = CreditChargeFragment()
         val mBundle = Bundle()
-        mBundle.putInt("creditid", supplier.id)
+        mBundle.putInt("creditid", supplier.credit!!.id)
         mBundle.putString("suppliername", supplier.name)
         bottomSheet.arguments = mBundle
         bottomSheet.show(supportFragmentManager, "showinfg")
     }
-    override fun OnAction(type: BaseViewModel.ActionType) {
-        TODO("Not yet implemented")
+    fun openPay(supplier: BSupplier){
+        val bottomSheet : PayFromCreditFragment = PayFromCreditFragment()
+        val mBundle = Bundle()
+        mBundle.putInt("creditid", supplier.credit!!.id)
+        mBundle.putInt("supplierid", supplier.id)
+        mBundle.putInt("marketid",marketId)
+        mBundle.putString("suppliername", supplier.name)
+        bottomSheet.arguments = mBundle
+        bottomSheet.show(supportFragmentManager, "showinfg")
     }
+        override fun OnAction(type: BaseViewModel.ActionType) {
+            when (type) {
+                BaseViewModel.ActionType.SHOW_WAIT -> showWaiting()
+                BaseViewModel.ActionType.CLOSE_WAIT -> closeWaiting()
+                BaseViewModel.ActionType.SHOW_MARKET_ACTIVITY -> {
+                    val intent = Intent(this, MainActivity::class.java).apply {
+                    }
+                    startActivity(intent)
+                }
+                else -> {
+                    print("x is neither 1 nor 2")
+                }
+            }
+        }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         TODO("Not yet implemented")
