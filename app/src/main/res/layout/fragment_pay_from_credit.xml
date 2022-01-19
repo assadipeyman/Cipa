@@ -51,7 +51,7 @@
             android:layout_marginStart="@dimen/activity_horizontal_half_margin"
             android:text="ریال"/>
             <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_charge_amount"
+            android:id="@+id/et_pay_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

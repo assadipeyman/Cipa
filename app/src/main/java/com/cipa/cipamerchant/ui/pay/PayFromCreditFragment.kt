@@ -8,13 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.cipa.cipamerchant.R
 import com.cipa.cipamerchant.base.BaseBottomSheetFragment
 import com.cipa.cipamerchant.base.BaseViewModel
+import com.cipa.cipamerchant.data.model.MessageDialogData
 import com.cipa.cipamerchant.databinding.FragmentCreditChargeBinding
 import com.cipa.cipamerchant.databinding.FragmentPayFromCreditBinding
 import com.cipa.cipamerchant.ui.driver.DriverListActivity
 import com.cipa.cipamerchant.ui.supplier.SupplierListActivity
+import com.cipa.cipamerchant.utils.StringUtils.withCurrencyFormat
 import com.cipa.cipamerchant.utils.StringUtils.withPersianDigits
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
@@ -60,14 +63,23 @@ class PayFromCreditFragment :  BaseBottomSheetFragment<PayFromCreditViewModel>(P
         })
 
         binding.btnCharge.setOnClickListener(View.OnClickListener { v ->
-            viewModel.pay(
-                Integer.parseInt(binding.etChargeAmount.text.toString().replace(",","")),
-                binding.etInvoiceNumber.text.toString(),
-                driverId
-            )
+            try {
+                viewModel.pay(
+                    Integer.parseInt(binding.etPayAmount.text.toString().replace(",", "")),
+                    binding.etInvoiceNumber.text.toString(),
+                    driverId
+                )
+            }catch(ex:Exception){
+                showMessage( MessageDialogData(
+                    SweetAlertDialog.ERROR_TYPE,
+                    "خرید",
+                    "اطلاعات را به درستی وارد نمایید"
+                )
+                );
+            }
         })
 
-        binding.etChargeAmount.addTextChangedListener(textWatcher)
+        binding.etPayAmount.addTextChangedListener(textWatcher)
 
         viewModel.state.observe(this , Observer { t ->
             if(t) {
@@ -103,8 +115,8 @@ private var flag: Int=0;
                             s.toString().replace(",", "")
                         )
                     ).withPersianDigits
-                    binding.etChargeAmount.setText(txt)
-                    binding.etChargeAmount.setSelection(binding.etChargeAmount.text!!.length)
+                    binding.etPayAmount.setText(txt)
+                    binding.etPayAmount.setSelection(binding.etPayAmount.text!!.length)
                     flag = 0
                 }
             }
