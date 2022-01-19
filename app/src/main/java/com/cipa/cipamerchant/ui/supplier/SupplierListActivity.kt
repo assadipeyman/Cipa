@@ -15,6 +15,8 @@ import com.cipa.cipamerchant.data.businessData.BSupplier
 import com.cipa.cipamerchant.databinding.ActivitySupplierListBinding
 import com.cipa.cipamerchant.ui.credit.CreditChargeFragment
 import com.cipa.cipamerchant.ui.credit.PayFromCreditFragment
+import android.view.MenuItem
+
 
 class SupplierListActivity  : BaseActivity<SupplierListViewModel>(SupplierListViewModel::class.java),
     SearchView.OnQueryTextListener {
@@ -26,6 +28,7 @@ class SupplierListActivity  : BaseActivity<SupplierListViewModel>(SupplierListVi
         binding = ActivitySupplierListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true);
+        supportActionBar!!.setHomeButtonEnabled(true);
         InitActivity()
         marketId =  intent.extras!!.getInt("marketid")
         viewModel.handleFormLoad(marketId)
@@ -59,6 +62,16 @@ class SupplierListActivity  : BaseActivity<SupplierListViewModel>(SupplierListVi
 
     fun updateUi(){
         viewModel.handleFormLoad(marketId)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

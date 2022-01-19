@@ -57,7 +57,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:inputType="numberDecimal"
-            android:hint="مبلغ شارژ"
+            android:hint="مبلغ خرید"
             android:background="@null"
             android:fontFamily="@font/iransansmobile"
             />

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cipa.cipamerchant.base.BaseActivity
 import com.cipa.cipamerchant.base.BaseViewModel
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import com.cipa.cipamerchant.MainActivity
 import com.cipa.cipamerchant.R
@@ -58,7 +59,15 @@ class DriverListActivity  : BaseActivity<DriverListViewModel>(DriverListViewMode
         searchView.setOnQueryTextListener(this)
         return true
     }
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     override fun OnAction(type: BaseViewModel.ActionType) {
         when (type) {
             BaseViewModel.ActionType.SHOW_WAIT -> showWaiting()

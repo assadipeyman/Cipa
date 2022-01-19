@@ -13,43 +13,35 @@ import com.cipa.cipamerchant.databinding.FragmentHomeBinding
 import com.cipa.cipamerchant.ui.supplier.SupplierListActivity
 import com.cipa.cipamerchant.utils.StringUtils.withCurrencyFormat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.cipa.cipamerchant.adaptor.ReportAdapter
+import com.cipa.cipamerchant.databinding.FragmentReportsBinding
 
-class HomeFragment :  BaseFragment<HomeViewModel>(HomeViewModel::class.java) {
+class ReportFragment :  BaseFragment<ReportViewModel>(ReportViewModel::class.java) {
 
-    private var binding:FragmentHomeBinding? = null
+    private var binding:FragmentReportsBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentReportsBinding.inflate(layoutInflater)
         initFragment()
 
         viewModel.handleFormLoad()
-        viewModel.marketList?.observe(viewLifecycleOwner,
+        viewModel.reports?.observe(viewLifecycleOwner,
             Observer { t ->
                 //binding!!.rvMarket.layoutManager = LinearLayoutManager(requireContext())
-                binding!!.rvMarket.layoutManager  = GridLayoutManager(requireContext(), 2)
+                binding!!.rvReport.layoutManager  = LinearLayoutManager(requireContext())
 
-                var adaptor = MarketAdapter(t,
+                var adaptor = ReportAdapter(t,
                     {
                             position, market ->
-                        val intent = Intent(requireActivity(), SupplierListActivity::class.java)
-                        val mBundle = Bundle()
-                        mBundle.putInt("marketid", market.merchantBDM.id)
-                        intent.putExtras(mBundle)
-                        startActivity(intent)
                     })
-                binding!!.rvMarket.adapter = adaptor
+                binding!!.rvReport.adapter = adaptor
             }
         )
-        viewModel.userData.observe(viewLifecycleOwner, Observer { t ->
-            binding!!.tvTotalDebt.text =
-                12500000.0.withCurrencyFormat  //t.sumRealDebt.toString()
-            binding!!.tvMaxCredit.text =
-                12500000000.0.withCurrencyFormat  //t.maxCredit.toString()
-        })
         return  binding!!.root
     }
 
@@ -64,6 +56,5 @@ class HomeFragment :  BaseFragment<HomeViewModel>(HomeViewModel::class.java) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.handleFormLoad()
     }
 }

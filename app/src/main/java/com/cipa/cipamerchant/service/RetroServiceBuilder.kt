@@ -15,6 +15,7 @@ object RetroServiceBuilder {
     fun<T : CipaPrivateService> buildService(service: Class<T>): T {
 
         return Retrofit.Builder()
+            //.baseUrl("http://192.168.89.45:8585/")
             .baseUrl("http://91.232.65.100:1460/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(
@@ -29,6 +30,7 @@ object RetroServiceBuilder {
 
         return Retrofit.Builder()
             .baseUrl("http://91.232.65.100:1460/")
+            //.baseUrl("http://192.168.89.45:8585/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder().build())
             .build().create(service)

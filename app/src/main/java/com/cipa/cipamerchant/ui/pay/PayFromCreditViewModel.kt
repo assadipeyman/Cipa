@@ -19,6 +19,7 @@ import android.content.DialogInterface
 import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.cipa.cipamerchant.data.model.MessageDialogData
+import com.cipa.cipamerchant.utils.StringUtils.withCurrencyFormat
 
 class PayFromCreditViewModel()  : BaseViewModel() {
 
@@ -42,19 +43,32 @@ class PayFromCreditViewModel()  : BaseViewModel() {
             ) {
                 action.postValue(BaseViewModel.ActionType.CLOSE_WAIT)
                 if (response.code() == 200 && response.body() != null) {
-                    MemoryData.updateCredit(
-                        response.body()!!.credit.cMerchantId,
-                        response.body()!!.credit.id,
-                        response.body()!!.credit
-                    )
-                    message.postValue(
-                        MessageDialogData(
-                            SweetAlertDialog.SUCCESS_TYPE,
-                            "شارژ",
-                            "َخرید با موفقیت انجام شد"
+                    if(response.body()!!.isSuccessfully) {
+                        MemoryData.updateCredit(
+                            response.body()!!.credit.cMerchantId,
+                            response.body()!!.credit.id,
+                            response.body()!!.credit
                         )
-                    )
-                    state.postValue(true)
+                        message.postValue(
+                            MessageDialogData(
+                                SweetAlertDialog.SUCCESS_TYPE,
+                                "خرید",
+                                "َخرید با موفقیت انجام شد"
+                            )
+                        )
+                        state.postValue(true)
+                    }
+                    else
+                    {
+                        message.postValue(
+                            MessageDialogData(
+                                SweetAlertDialog.ERROR_TYPE,
+                                "خرید",
+                                "اعتبار شما برای انجام خرید کافی نیست. برای خرید حداقل نیاز به شارژ مبلغ زیر دارید \n " + response.body()!!.chargAmount.withCurrencyFormat
+                            )
+                        )
+                        state.postValue(false)
+                    }
                 } else if (response.code() == 400 && response.errorBody() != null && response.errorBody()!!
                         .string()!!
                         .contains("You can not charge your account multiple times in less than a minute")
@@ -62,7 +76,7 @@ class PayFromCreditViewModel()  : BaseViewModel() {
                     message.postValue(
                         MessageDialogData(
                             SweetAlertDialog.ERROR_TYPE,
-                            "شارژ",
+                            "خرید",
                             "برای انجام شارژ حداقل باید 1 دقیقه از آخرین شارژ شما گذشته باشد. لطفا کمی صبر نمایید"
                         )
                     )

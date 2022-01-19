@@ -84,9 +84,11 @@ class PayFromCreditFragment :  BaseBottomSheetFragment<PayFromCreditViewModel>(P
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        driverName = data!!.getStringExtra("drivername")!!
-        driverId = data!!.getIntExtra("driverid", 0)
-        binding.tvDriver.text = driverName
+        if (data != null) {
+            driverName = data!!.getStringExtra("drivername")!!
+            driverId = data!!.getIntExtra("driverid", 0)
+            binding.tvDriver.text = driverName
+        }
     }
 
 private var flag: Int=0;

@@ -34,7 +34,7 @@ class DriverListViewModel()  : BaseViewModel() {
         val supplier: BSupplier? = MemoryData.getSupplier(marketId, supplierId)
         if (supplier!!.drivers != null && supplier!!.drivers!!.size > 0) {
             driverList.postValue(supplier!!.drivers)
-            title.postValue(supplier.name)
+            title.postValue("رانندگان " + supplier.name)
         }
         else
             fetchDrivers()
