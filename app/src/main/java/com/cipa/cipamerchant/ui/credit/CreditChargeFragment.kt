@@ -61,18 +61,23 @@ private var flag: Int=0;
 
     private val textWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-            if(flag==0) {
-                if(!s.isNullOrEmpty()) {
-                    flag = 1
-                    val txt = DecimalFormat("#,###").format(
-                        Integer.parseInt(
-                            s.toString().replace(",", "")
-                        )
-                    ).withPersianDigits
-                    binding.etChargeAmount.setText(txt)
-                    binding.etChargeAmount.setSelection(binding.etChargeAmount.text!!.length)
-                    flag = 0
+            try {
+                if (flag == 0) {
+                    if (!s.isNullOrEmpty()) {
+                        flag = 1
+                        val txt = DecimalFormat("#,###").format(
+                            Integer.parseInt(
+                                s.toString().replace(",", "")
+                            )
+                        ).withPersianDigits
+                        binding.etChargeAmount.setText(txt)
+                        binding.etChargeAmount.setSelection(binding.etChargeAmount.text!!.length)
+                        flag = 0
+                    }
                 }
+            }catch (Ex:Exception)
+            {
+                flag = 0
             }
         }
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
